@@ -12,4 +12,4 @@ python-jose
 motor
 pdfplumber
 faiss-cpu
-
+sentence-transformers
