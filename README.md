@@ -37,7 +37,7 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/yourusername/balanceai.git](https://github.com/yourusername/balanceai.git)
+git clone https://github.com/SamarthKumbar/FinBot.git
 cd balanceai
 
 ```
@@ -88,6 +88,7 @@ streamlit run app.py
 
 
 🧪 Usage Flow
+```
 Register a new user account with an appropriate role (e.g., "analyst").
 
 Login to authenticate and receive your session token.
@@ -102,7 +103,12 @@ Chat with the document by asking questions like:
 
 "Compare total assets and total liabilities for the last period."
 
+```
+
+
 How RAG Works Here
+
+```
 The application leverages a RAG pipeline to provide accurate answers:
 
 PDF Parsing: Raw text is extracted from the uploaded PDF using pdfplumber.
@@ -116,3 +122,5 @@ Indexing: The embeddings are stored in a FAISS vector index for fast retrieval.
 Querying: When a user asks a question, the system retrieves the most relevant chunks from the index.
 
 LLM Prompting: The retrieved context and the user's question are sent to the LLaMA-3 model via the Groq API to generate a final, coherent answer.
+
+```
