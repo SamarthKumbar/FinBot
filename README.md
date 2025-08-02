@@ -126,5 +126,8 @@ LLM Prompting: The retrieved context and the user's question are sent to the LLa
 ```
 
 
-<img src="Images/image1.png" alt="Register Page" width="300"/>
+<img src="Images/image1.png" alt="Register Page" width="400"/>
+<img src="Images/image2.png" alt="Login Page" width="400"/>
+<img src="Images/image3.png" alt="File Upload Page" width="400"/>
+<img src="Images/image4.png" alt="Chat Page" width="400"/>
 
