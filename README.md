@@ -1,6 +1,6 @@
-# 📊 BalanceAI – Chat with Company Balance Sheets using AI
+# 📊 FinBot – Chat with Company Balance Sheets using AI
 
-**BalanceAI** is an intelligent assistant that enables analysts and top management to upload and interact with company balance sheets using natural language. It extracts structured financial data from PDFs and allows you to ask questions powered by a Retrieval-Augmented Generation (RAG) system using LLaMA via the Groq API.
+**FinBot** is an intelligent assistant that enables analysts and top management to upload and interact with company balance sheets using natural language. It extracts structured financial data from PDFs and allows you to ask questions powered by a Retrieval-Augmented Generation (RAG) system using LLaMA via the Groq API.
 
 ---
 
@@ -126,8 +126,15 @@ LLM Prompting: The retrieved context and the user's question are sent to the LLa
 ```
 
 
-<img src="Images/image1.png" alt="Register Page" width="400"/>
-<img src="Images/image2.png" alt="Login Page" width="400"/>
-<img src="Images/image3.png" alt="File Upload Page" width="400"/>
-<img src="Images/image4.png" alt="Chat Page" width="400"/>
+<table>
+  <tr>
+    <td><img src="Images/image1.png" alt="Register Page" width="500"/></td>
+    <td><img src="Images/image2.png" alt="Login Page" width="500"/></td>
+  </tr>
+  <tr>
+    <td><img src="Images/image3.png" alt="File Upload Page" width="500"/></td>
+    <td><img src="Images/image4.png" alt="Chat Page" width="500"/></td>
+  </tr>
+</table>
+
 
