@@ -1,61 +1,34 @@
 # 📊 BalanceAI – Chat with Company Balance Sheets using AI
 
-**BalanceAI** is an intelligent assistant that enables analysts and top management to upload and interact with company balance sheets using natural language. It extracts structured financial data from PDFs and allows you to ask questions powered by a Retrieval-Augmented Generation (RAG) system using LLaMA or GPT via Groq API.
+**BalanceAI** is an intelligent assistant that enables analysts and top management to upload and interact with company balance sheets using natural language. It extracts structured financial data from PDFs and allows you to ask questions powered by a Retrieval-Augmented Generation (RAG) system using LLaMA via the Groq API.
 
 ---
 
 ## 🚀 Features
 
-- 📝 Register/Login with role-based access (Analyst / Top Management)
-- 📤 Upload PDF balance sheets
-- 📦 Extracts data using pdfplumber and sentence-transformers
-- 💬 Chat with balance sheets using RAG and Groq/OpenAI LLMs
-- 🔐 Role-specific access: CEOs see their company; group heads see all
-- ✅ Simple, secure, and production-ready
+-   **Secure Authentication**: Register and log in with JWT-based, role-specific access.
+-   **PDF Analysis**: Upload balance sheet PDFs for intelligent data extraction.
+-   **Interactive Chat**: Ask complex questions in natural language to get instant insights.
+-   **RAG Pipeline**: Utilizes a powerful RAG system for accurate, context-aware answers.
+-   **Role-Based Access Control**:
+    -   **Analyst**: Can upload documents and perform analysis.
+    -   **Top Management**: Can view data for their assigned company.
+    -   **Group Head**: Has a global view across all companies.
 
 ---
 
 ## 🧱 Tech Stack
 
-| Layer             | Tech                            |
-|------------------|---------------------------------|
-| Backend API      | FastAPI                         |
-| Auth & Security  | JWT, OAuth2                     |
-| Database         | MongoDB (with Motor)            |
-| PDF Extraction   | pdfplumber                      |
-| Embedding Model  | sentence-transformers (MiniLM)  |
-| Vector Store     | FAISS                           |
-| LLM              | Groq API with LLaMA-3-70B       |
-| Frontend         | Streamlit                       |
-
-
-
-## 🗂️ Project Structure
-
-balanceai/
-│
-├── backend/
-│ ├── main.py # FastAPI entry point
-│ ├── db.py # MongoDB connection
-│ ├── auth.py # JWT auth logic
-│ ├── models.py # Pydantic schemas
-│ ├── rag.py # PDF parsing + RAG logic
-│ └── routers/
-│ ├── auth_routes.py # /auth/signup, /auth/login
-│ ├── balance.py # /balance/upload-file (CSV)
-│ └── rag_routes.py # /upload-pdf and /ask
-│
-├── frontend/
-│ ├── app.py # Streamlit frontend
-│ └── utils.py # API interaction helpers
-│
-├── .env # Secrets and keys
-├── requirements.txt # Python dependencies
-└── README.md # You are here
-
-yaml
-Copy
-Edit
+| Layer               | Technology                                |
+| ------------------- | ----------------------------------------- |
+| **Backend API** | FastAPI                                   |
+| **Authentication** | JWT, OAuth2                               |
+| **Database** | MongoDB (with Motor for async operations) |
+| **PDF Extraction** | `pdfplumber`                              |
+| **Embedding Model** | `sentence-transformers` (all-MiniLM-L6-v2)  |
+| **Vector Store** | FAISS (Facebook AI Similarity Search)     |
+| **LLM Provider** | Groq API (LLaMA-3-70B)                    |
+| **Frontend** | Streamlit                                 |
 
 ---
 
@@ -64,91 +37,74 @@ Edit
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/balanceai.git
+git clone [https://github.com/yourusername/balanceai.git](https://github.com/yourusername/balanceai.git)
 cd balanceai
+
 2. Backend Setup
-⬢ Create a virtual environment
-bash
-Copy
-Edit
+First, set up and run the FastAPI backend server.
+
+Navigate to Backend Directory & Create Virtual Environment
+
+cd backend
 python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-🛠 Install dependencies
-bash
-Copy
-Edit
+
+# On macOS/Linux
+source venv/bin/activate
+# On Windows
+.\venv\Scripts\activate
+
+Install Dependencies
 pip install -r requirements.txt
-🔐 Configure .env in backend directory
-Create a .env file in your backend/ folder:
 
-ini
-Copy
-Edit
-MONGO_URI=mongodb://localhost:27017
-SECRET_KEY=your_jwt_secret
-ALGORITHM=HS256
+Configure Environment Variables
+Create a file named .env inside the backend/ folder and add the following:
+
+MONGO_URI="your_mongodb_connection_string"
+SECRET_KEY="a_very_strong_and_secret_key_for_jwt"
+ALGORITHM="HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES=60
-OPENAI_API_KEY=your_groq_key_here
-3. Run the FastAPI Backend
-bash
-Copy
-Edit
-uvicorn backend.main:app --reload
-Visit API docs at: http://localhost:8000/docs
+GROQ_API_KEY="your_groq_api_key_here"
 
-4. Streamlit Frontend Setup
-Open a new terminal and run:
+Run the Backend Server
+uvicorn main:app --reload
+The API documentation will be live at http://127.0.0.1:8000/docs
 
-bash
-Copy
-Edit
-cd frontend
+
+3. Frontend Setup
+Open a new terminal for the Streamlit frontend.
+
+Navigate to Frontend Directory
+cd ../frontend
+
+Run the Streamlit App
 streamlit run app.py
-🧪 Example Flow
-Register as either an analyst or top-management
 
-Login to obtain your JWT token
+🧪 Usage Flow
+Register a new user account with an appropriate role (e.g., "analyst").
 
-Upload a PDF balance sheet from the sidebar
+Login to authenticate and receive your session token.
 
-Ask questions like:
+Upload a balance sheet PDF using the sidebar navigation.
 
-"What is the profit in Q1 2025?"
+Chat with the document by asking questions like:
 
-"Has revenue grown over time?"
+"What was the net profit in Q1 2025?"
 
-"Compare assets and liabilities."
+"Has revenue shown growth over time?"
 
-🧠 Role-Based Access
-Role	Access Level
-Analyst	Can upload PDFs and ask questions
-Top Management	Can only view their assigned company
-Group Head	Can view all companies (like Ambani family)
+"Compare total assets and total liabilities for the last period."
 
-📌 Features to Add Next
-📊 Financial trend graphs
+How RAG Works Here
+The application leverages a RAG pipeline to provide accurate answers:
 
-🧾 Quarterly comparisons & summaries
+PDF Parsing: Raw text is extracted from the uploaded PDF using pdfplumber.
 
-🔍 Company/vertical filters
+Chunking: The long text is split into smaller, semantically meaningful chunks.
 
-📁 Excel support in addition to PDF
+Embedding: Text chunks are converted into numerical vectors using the all-MiniLM-L6-v2 model.
 
-💡 AI-generated action recommendations
+Indexing: The embeddings are stored in a FAISS vector index for fast retrieval.
 
-🤖 How RAG Works Here
-PDF Parsing – Extract raw text from uploaded PDF using pdfplumber.
+Querying: When a user asks a question, the system retrieves the most relevant chunks from the index.
 
-Chunking – Split long text into manageable chunks (e.g., 500 words).
-
-Embedding – Embed chunks using all-MiniLM-L6-v2.
-
-Indexing – Store them in a FAISS vector index.
-
-Querying – At query time, retrieve top-k similar chunks.
-
-LLM Prompt – Send retrieved context + user question to LLaMA/GPT via Groq API.
-
-
-
-
+LLM Prompting: The retrieved context and the user's question are sent to the LLaMA-3 model via the Groq API to generate a final, coherent answer.
