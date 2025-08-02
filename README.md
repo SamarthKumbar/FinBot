@@ -40,7 +40,10 @@
 git clone [https://github.com/yourusername/balanceai.git](https://github.com/yourusername/balanceai.git)
 cd balanceai
 
-2. Backend Setup
+```
+
+### 2. Backend Setup
+```
 First, set up and run the FastAPI backend server.
 
 Navigate to Backend Directory & Create Virtual Environment
@@ -69,8 +72,10 @@ Run the Backend Server
 uvicorn main:app --reload
 The API documentation will be live at http://127.0.0.1:8000/docs
 
+```
 
-3. Frontend Setup
+### 3. Frontend Setup
+```
 Open a new terminal for the Streamlit frontend.
 
 Navigate to Frontend Directory
@@ -78,6 +83,9 @@ cd ../frontend
 
 Run the Streamlit App
 streamlit run app.py
+
+```
+
 
 🧪 Usage Flow
 Register a new user account with an appropriate role (e.g., "analyst").
