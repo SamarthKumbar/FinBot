@@ -8,3 +8,4 @@ pandas
 python-dotenv
 pydantic[email]
 passlib[bcrypt]
+python-jose
