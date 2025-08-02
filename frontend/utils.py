@@ -1,11 +1,11 @@
 import requests
 
-API_BASE = "http://localhost:8003"  # or your deployed URL
+API_BASE = "http://localhost:8003" 
 
 def login_user(email, password):
     response = requests.post(
         f"{API_BASE}/auth/login",
-        json={"email": email, "password": password}  # ✅ use correct field names
+        json={"email": email, "password": password}  
     )
     if response.status_code == 200:
         return response.json().get("access_token")
@@ -18,7 +18,6 @@ def register_user(email, full_name, password, role):
         "role": role,
         "password": password
     }
-    print("Payload:", payload)
     headers = {
         "Content-Type": "application/json"
     }

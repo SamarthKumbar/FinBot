@@ -1,29 +1,24 @@
 import streamlit as st
-# Assuming your utility functions are in a 'utils.py' file
+
 from utils import login_user, upload_pdf, ask_question, register_user
 
 st.set_page_config(page_title="Balance Sheet Analyst", layout="wide")
 st.title("📊 Chat with Balance Sheets")
 
-# ---------------------------
-# 🔐 Session State Initialization
-# ---------------------------
-# Stores the authentication token
+
 if "token" not in st.session_state:
     st.session_state.token = None
-# Manages which auth screen to show: 'login' or 'register'
+
 if "auth_view" not in st.session_state:
     st.session_state.auth_view = "login"
-# Stores chat history
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 
-# ---------------------------
-# 🛂 Authentication Section
-# ---------------------------
+
 if st.session_state.token is None:
-    # --- Login View ---
+
     if st.session_state.auth_view == "login":
         st.subheader("🔐 Login")
         with st.form("login_form"):
@@ -45,7 +40,7 @@ if st.session_state.token is None:
             st.session_state.auth_view = "register"
             st.rerun()
 
-    # --- Registration View ---
+
     elif st.session_state.auth_view == "register":
         st.subheader("📝 Register New Account")
         with st.form("register_form"):
@@ -71,7 +66,7 @@ if st.session_state.token is None:
                         try:
                             detail = response.json().get("detail", detail)
                         except Exception:
-                            pass # Keep the default error message
+                            pass
                         st.error(f"Registration failed: {detail}")
 
                 except Exception as e:
@@ -82,33 +77,29 @@ if st.session_state.token is None:
             st.session_state.auth_view = "login"
             st.rerun()
 
-# ---------------------------
-# ✅ Authenticated Application View
-# ---------------------------
+
 else:
     st.sidebar.success("Logged in ✅")
 
-    # Logout Button
     if st.sidebar.button("Logout"):
         st.session_state.token = None
-        st.session_state.auth_view = "login" # Reset to login view
-        st.session_state.messages = [] # Clear chat history
+        st.session_state.auth_view = "login" 
+        st.session_state.messages = [] 
         st.rerun()
 
-    # Navigation for authenticated user
+    
     nav = st.sidebar.radio("Menu", ["Chat", "Upload PDF"])
 
-    # --- Chat Page ---
+    
     if nav == "Chat":
         st.subheader("💬 Ask a Question")
         st.info("Ask questions about the financial data from the uploaded balance sheets.")
 
-        # Display chat messages
+   
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
 
-        # Chat input
         if prompt := st.chat_input("What is the total revenue for Q2?"):
             st.chat_message("user").markdown(prompt)
             st.session_state.messages.append({"role": "user", "content": prompt})
@@ -124,7 +115,7 @@ else:
                 st.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
 
-    # --- Upload Page ---
+
     elif nav == "Upload PDF":
         st.subheader("📎 Upload Balance Sheet (PDF)")
         st.info("Upload a balance sheet PDF to make it available for analysis in the chat.")
