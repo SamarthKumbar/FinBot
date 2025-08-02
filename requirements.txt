@@ -6,3 +6,4 @@ python-multipart
 streamlit
 pandas
 python-dotenv
+pydantic[email]
