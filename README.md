@@ -124,3 +124,7 @@ Querying: When a user asks a question, the system retrieves the most relevant ch
 LLM Prompting: The retrieved context and the user's question are sent to the LLaMA-3 model via the Groq API to generate a final, coherent answer.
 
 ```
+
+
+<img src="Images/image1.png" alt="Register Page" width="300"/>
+
