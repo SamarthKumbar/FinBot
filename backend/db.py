@@ -4,7 +4,7 @@ import os
 
 load_dotenv()
 
-MONGO_DETAILS = os.getenv("MONGODB_URL")
+MONGO_DETAILS = os.getenv("MONGO_URL")
 DB_NAME = os.getenv("DB_NAME", "balance_sheet_db")
 
 client = AsyncIOMotorClient(MONGO_DETAILS)
