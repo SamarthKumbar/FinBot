@@ -3,6 +3,7 @@ import pdfplumber
 import faiss
 import google.generativeai as genai
 import os
+import numpy as np
 
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 EMBED_MODEL = "models/embedding-001"
@@ -22,13 +23,28 @@ def chunk_text(text, chunk_size=500):
     return [' '.join(words[i:i+chunk_size]) for i in range(0, len(words), chunk_size)]
 
 def embed_and_store(chunks):
+
     global index, doc_store
-    vectors = EMBED_MODEL.encode(chunks)
-    index.add(vectors)
+
+    response = genai.embed_content(
+        model=EMBED_MODEL,
+        content=chunks,
+        task_type="RETRIEVAL_DOCUMENT"
+    )
+    vectors = response['embedding']
+    
+    index.add(np.array(vectors, dtype=np.float32))
+    
     for i, chunk in enumerate(chunks):
         doc_store[len(doc_store)] = chunk
 
 def retrieve_chunks(query, k=5):
-    query_vec = EMBED_MODEL.encode([query])
-    D, I = index.search(query_vec, k)
+   
+    response = genai.embed_content(
+        model=EMBED_MODEL,
+        content=query,
+        task_type="RETRIEVAL_QUERY"
+    )
+    query_vec = response['embedding']
+    D, I = index.search(np.array([query_vec], dtype=np.float32), k)
     return [doc_store[i] for i in I[0] if i in doc_store]
