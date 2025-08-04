@@ -1,7 +1,6 @@
 # rag_logic.py
 import pdfplumber
 import faiss
-from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
 import os
 
