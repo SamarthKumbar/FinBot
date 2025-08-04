@@ -11,6 +11,13 @@ EMBED_DIM = 768
 index = faiss.IndexFlatL2(EMBED_DIM)
 doc_store = {} 
 
+def reset_storage():
+    global index, doc_store
+    print(" Deleting old embeddings and documents...")
+    index = faiss.IndexFlatL2(EMBED_DIM)
+    doc_store = {}
+
+
 def extract_pdf_text(file_path):
     full_text = ""
     with pdfplumber.open(file_path) as pdf:
@@ -23,6 +30,8 @@ def chunk_text(text, chunk_size=500):
     return [' '.join(words[i:i+chunk_size]) for i in range(0, len(words), chunk_size)]
 
 def embed_and_store(chunks):
+
+    reset_storage()
 
     global index, doc_store
 
