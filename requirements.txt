@@ -23,10 +23,6 @@ motor
 # PDF Parsing
 pdfplumber
 
-# Embedding + Retrieval
-sentence-transformers
-
-
 # OpenAI API (optional)
 openai
 
@@ -44,6 +40,4 @@ python-multipart
 faiss-cpu
 google-generativeai
 
-# Torch CPU-only (to prevent CUDA bloat)
-torch==2.2.2+cpu
--f https://download.pytorch.org/whl/torch_stable.html
+
