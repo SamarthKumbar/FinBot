@@ -2,11 +2,12 @@
 import pdfplumber
 import faiss
 from sentence_transformers import SentenceTransformer
+import google.generativeai as genai
 import os
 
-
-EMBED_MODEL = SentenceTransformer("all-MiniLM-L6-v2")
-EMBED_DIM = 384
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+EMBED_MODEL = "models/embedding-001"
+EMBED_DIM = 768
 index = faiss.IndexFlatL2(EMBED_DIM)
 doc_store = {} 
 

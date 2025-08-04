@@ -42,7 +42,7 @@ python-jose
 # Optional - Only if needed
 python-multipart
 faiss-cpu
-
+google-generativeai
 
 # Torch CPU-only (to prevent CUDA bloat)
 torch==2.2.2+cpu
