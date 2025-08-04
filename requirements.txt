@@ -24,7 +24,7 @@ motor
 pdfplumber
 
 # Embedding + Retrieval
-sentence-transformers==2.2.2
+sentence-transformers
 
 
 # OpenAI API (optional)
