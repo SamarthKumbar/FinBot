@@ -5,6 +5,7 @@ import google.generativeai as genai
 import os
 import numpy as np
 
+
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 EMBED_MODEL = "models/embedding-001"
 EMBED_DIM = 768
